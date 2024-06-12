@@ -23,18 +23,20 @@ app.post('/print', async (req, res) => {
   });
 
   try {
+    console.log("printer is===" , printer);
     console.log('Checking printer connection...');
     const isConnected = await printer.isPrinterConnected();
     console.log('Printer connected:', isConnected);
     if (!isConnected) {
       return res.status(500).send({ success: false, error: 'Printer is not connected' });
+
     }
 
     console.log('Starting print job...');
 
     printer.alignCenter();
     printer.println("Hello world");
-    printer.cut();
+    // printer.cut();
 
     let execute = await printer.execute();
     console.log('Print success:', execute);
